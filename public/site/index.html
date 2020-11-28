@@ -5,15 +5,108 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Book Site Homepage</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
 
-<body>
-<div class="container text-center">
-    <h1>Netcentric Final Integration Project</h1>
-</div>
-</body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-shadow">
+        <a class="navbar-brand" href="index.html">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="show-books.html">Display All</a>
+                <a class="nav-item nav-link" href="find-book.html">Find Book</a>
+                <a class="nav-item nav-link" href="add-book.html">Add New Book</a>
+                <a class="nav-item nav-link" href="remove-book.html">Remove Book</a>
+                <a class="nav-item nav-link" href="update-book.html">Update Book</a>
+            </div>
+        </div>
+    </nav>
+</header>
 
+<body>
+<div class="container">
+    <h1 class="home-title">Netcentric Final Integration Project</h1>
+    <div>
+        <p class="lead">
+            This website was made as a final project for Netcentic Computing at Seattle Pacific University. The following
+            describe the functions of the various options in the navigation bar above.
+        </p>
+        <p>
+            <strong>Display All:</strong> Displays all the book objects stored in the MongoDB database using a
+            Node.js API as the <a target="_blank" href="https://github.com/Eli-Green/integration">backend</a>.
+        </p>
+        <p>
+            <strong>Find Book:</strong> Allows you to search for a specific book using its ISBN or the author's name.
+        </p>
+        <p>
+            <strong>Add New Book:</strong> Provides the functionality to add any book into the MongoDB database.
+        </p>
+        <p>
+            <strong>Remove Book:</strong> Gives the ability to remove any book from the database using its isbn.
+        </p>
+        <p>
+            <strong>Update Book:</strong> Allows you to update any of the available books in the database.
+        </p>
+    </div>
+
+
+    <button class="btn-primary btn-lg" id="btnLoadFriends">Load Friends</button>
+    <div class="jumbotron" id="output">
+
+    </div>
+</div>
+<script>
+    function CreateTable(data){         //data is the json that was returned from the server
+        let table = "";
+        table =
+            '<table class="table table-bordered table-hover"> \n' +
+            '   <thead>\n' +
+            '       <tr>\n' +
+            '           <th scope="col">First Name</th> \n'+
+            '           <th scope="col">Last Name</th> \n'+
+            '           <th scope="col">Phone</th> \n'+
+            '           <th scope="col">Email</th> \n'+
+            '           <th scope="col">Birthday</th> \n'+
+            '           <th scope="col">Can Call Anytime</th> \n'+
+            '       </tr>\n' +
+            '   </thead>\n' +
+            '   <tbody>\n';
+
+        for (let friend in data){       //for each friend object in the data that was returned
+            table +=                    //Sets the headings for the table
+                '       <tr>\n' +
+                '           <td>' + data[friend]["firstName"]+  '</td>\n' +
+                '           <td>' + data[friend]["lastName"]+  '</td>\n' +
+                '           <td>' + data[friend]["phone"]+  '</td>\n' +
+                '           <td>' + data[friend]["email"]+  '</td>\n' +
+                '           <td>' + data[friend]["birthday"]+  '</td>\n' +
+                '           <td>' + (data[friend]["callAnytime"]?"Yes":"No") +  '</td>\n' +
+                '       </tr>\n';
+        }
+
+        table +=
+            '   </tbody>\n' +
+            '</table>\n'
+        return table;           //return all the html data for the table that we just generated
+    }
+    document.getElementById("btnLoadFriends").addEventListener("click", (event) =>{     //when the button with btnLoadFriends is clicked, it triggers the building of the table
+        let url = "https://arias-friends-api.herokuapp.com/api/friends/"
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function (){         //onreadystate change is a kind of event handler that is a function built into xhttp. If the ready state changes on the xhttp object
+            if (this.readyState == 4 && this.status == 200){        //check if the ready state just recieved info (4) and the request was code 200. could have an else if the code is 404
+                document.getElementById("output").innerHTML =       //to respond in the case of an error
+                    CreateTable(JSON.parse(this.responseText));     //the table uses the response that the xhttp object recieves from the backend
+            }
+        };
+        xhttp.open('GET', url, true);       //This executes the above code using a GET request to the url (always set to true)
+        xhttp.send();                       //once this is all set, send it to the server. When the server replies it will trigger the onreadystatechange event
+    });
+</script>
+</body>
 </html>

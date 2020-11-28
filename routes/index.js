@@ -18,13 +18,13 @@ router.get('/', function(request, response, next) {
       '               <meta name="author" content="Carlos Arias"> \n' +
       '               <script type="text/javascript" src="/javascripts/books.js"></script>' +
       ' \n' +
-      '               <title>Client Side Example</title> \n' +
+      '               <title>Show All Books</title> \n' +
       '               <!-- Bootstrap core CSS --> \n' +
       '               <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> \n' +
       '       </head> \n' +
       '        <body> \n' +
       '               <div class="container" style="text-align: center"> \n' +
-      '               <h1>Client Side Example</h1><br> \n'
+      '               <h1>Netcentric Final Integration Project</h1><br> \n'
   );
   let currentDate = new Date();
   response.write(
