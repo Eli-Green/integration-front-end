@@ -21,7 +21,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="show-books.html">Display All</a>
                 <a class="nav-item nav-link" href="find-book.html">Find Book</a>
-                <a class="nav-item nav-link" href="add-book.html">Add New Book</a>
+                <a class="nav-item nav-link" href="add-book.html">Add Book</a>
                 <a class="nav-item nav-link" href="remove-book.html">Remove Book</a>
                 <a class="nav-item nav-link" href="update-book.html">Update Book</a>
             </div>
@@ -31,7 +31,7 @@
 
 <body>
 <div class="container">
-    <h1>Find Book</h1>
+    <h1 class="home-title">Find Book</h1>
     <div class="container">
         <h2>Please input either the isbn or the author and press the search button</h2>
         <div class="form-group">
@@ -48,7 +48,7 @@
     <div class="container">
         <button class="btn btn-lg btn-outline-primary" id="btnSearch">Search</button>
     </div>
-    <div class="jumbotron" id="output">
+    <div class="jumbotron jumbotron-padding" id="output">
 
     </div>
 </div>
@@ -85,7 +85,7 @@
                 '           <td>' + data["isbn"]+  '</td>\n' +
                 '           <td>' + data["name"]+  '</td>\n' +
                 '           <td>' + data["author"]+  '</td>\n' +
-                '           <td>' + data["price"]+  '</td>\n' +
+                '           <td>' + '$' + data["price"]+  '</td>\n' +
                 '       </tr>\n';
 
         table +=
@@ -113,7 +113,7 @@
                 '           <td>' + data[book]["isbn"] + '</td>\n' +
                 '           <td>' + data[book]["name"] + '</td>\n' +
                 '           <td>' + data[book]["author"] + '</td>\n' +
-                '           <td>' + data[book]["price"] + '</td>\n' +
+                '           <td>' + '$' + data[book]["price"] + '</td>\n' +
                 '       </tr>\n';
         }
 
@@ -150,7 +150,7 @@
                     document.getElementById("output").innerHTML =
                         PrintBookAuthor(JSON.parse(this.responseText));
                 }
-            } else if(this.status == 404 && document.getElementById("output").innerHTML == "") {
+            } else if(this.status == 404) {
                 document.getElementById("output").innerHTML = "The ISBN or Author that you are searching for was not found...";
             }
         };

@@ -21,7 +21,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="show-books.html">Display All</a>
                 <a class="nav-item nav-link" href="find-book.html">Find Book</a>
-                <a class="nav-item nav-link" href="add-book.html">Add New Book</a>
+                <a class="nav-item nav-link" href="add-book.html">Add Book</a>
                 <a class="nav-item nav-link" href="remove-book.html">Remove Book</a>
                 <a class="nav-item nav-link" href="update-book.html">Update Book</a>
             </div>
@@ -31,9 +31,9 @@
 
 <body>
 <div class="container">
-    <h1>Add Book</h1>
+    <h1 class="home-title">Add Book</h1>
     <div class="container">
-        <h2>Please provide your friend information</h2>
+        <h2>Please fill out all sections and submit using the "Add Book" below</h2>
         <div class="form-group">
             <label for="isbn">ISBN:</label>
             <input type="text" name="isbn" id="isbn" class="form-control"
@@ -52,17 +52,24 @@
         <div class="form-group">
             <label for="price">Price:</label>
             <input type="number" name="price" id="price" class="form-control"
-                   placeholder="0.0">
+                   placeholder="$5.99">
         </div>
     </div>
     <div class="container">
         <button class="btn btn-lg btn-outline-primary" id="btnAddFriend">Add Book</button>
     </div>
-    <div class="jumbotron" id="output">
+    <div class="jumbotron jumbotron-padding" id="output">
 
     </div>
 </div>
 <script>
+    function setPrice(){
+        retVal = parseFloat(document.getElementById("price").value);
+        console.log(typeof retVal);
+        retVal = (Math.round(retVal * 100) / 100).toFixed(2);
+        console.log(retVal);
+        return retVal.toString();
+    }
     document.getElementById("btnAddFriend").addEventListener("click", (event) =>{
         let url = "https://secure-eyrie-76929.herokuapp.com/api/books/"
         let xhttp = new XMLHttpRequest();
@@ -72,11 +79,12 @@
                     "<pre>" + this.responseText + "</pre>";
             }
         };
+
         // foo=bar&lorem=ipsum
         let friendData = "isbn=" + document.getElementById("isbn").value + "&" +
             "name=" + document.getElementById("name").value  + "&" +
             "author="  + document.getElementById("author").value  + "&" +
-            "price="  + document.getElementById("price").value;
+            "price="  + setPrice();
         xhttp.open('POST', url, true);
         // Just needed to place this line AFTER opening the object
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

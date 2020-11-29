@@ -21,10 +21,107 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="show-books.html">Display All</a>
                 <a class="nav-item nav-link" href="find-book.html">Find Book</a>
-                <a class="nav-item nav-link" href="add-book.html">Add New Book</a>
+                <a class="nav-item nav-link" href="add-book.html">Add  Book</a>
                 <a class="nav-item nav-link" href="remove-book.html">Remove Book</a>
                 <a class="nav-item nav-link" href="update-book.html">Update Book</a>
             </div>
         </div>
     </nav>
 </header>
+
+<body>
+<div class="container">
+    <h1 class="home-title">Update Book</h1>
+    <div class="container">
+        <h2>Please input either the isbn or the author and press the search button</h2>
+        <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <input type="text" name="isbn" id="isbn" class="form-control"
+                   placeholder="000-00-000-00">
+        </div>
+    </div>
+    <div class="container">
+        <button class="btn btn-lg btn-outline-primary" id="btnSearch">Search</button>
+    </div>
+    <div class="jumbotron jumbotron-padding" id="output">
+
+    </div>
+    <div class="container">
+        <button class="btn btn-lg btn-danger" id="btnDelete">Delete</button>
+    </div>
+</div>
+
+<script>
+    function CreateUrl(currentUrl){
+        currentUrl = currentUrl + '/' + document.getElementById("isbn").value;
+        return currentUrl;
+    }
+    function PrintBook(data){         //data is the json that was returned from the server
+        let table = "";
+        table =
+            '<table class="table table-bordered table-hover"> \n' +
+            '   <thead>\n' +
+            '       <tr>\n' +
+            '           <th scope="col">ISBN</th> \n'+
+            '           <th scope="col">Title</th> \n'+
+            '           <th scope="col">Author</th> \n'+
+            '           <th scope="col">Price</th> \n'+
+            '       </tr>\n' +
+            '   </thead>\n' +
+            '   <tbody>\n';
+
+        table +=
+            '       <tr>\n' +
+            '           <td>' + data["isbn"]+  '</td>\n' +
+            '           <td>' + data["name"]+  '</td>\n' +
+            '           <td>' + data["author"]+  '</td>\n' +
+            '           <td>' + '$' + data["price"]+  '</td>\n' +
+            '       </tr>\n';
+
+        table +=
+            '   </tbody>\n' +
+            '</table>\n'
+        return table;           //return all the html data for the table that we just generated
+    }
+    document.getElementById("btnSearch").addEventListener("click", (event) =>{
+        if(document.getElementById("isbn").value.length == 0){
+            console.log("isbn input is empty");
+            document.getElementById("output").innerHTML = "Please input a valid ISBN before Searching";
+        }
+        let url = CreateUrl("https://secure-eyrie-76929.herokuapp.com/api/books");
+        //let url = "https://secure-eyrie-76929.herokuapp.com/api/books/23423";
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200 && document.getElementById("isbn").value.length != 0) {
+                document.getElementById("output").innerHTML =
+                    PrintBook(JSON.parse(this.responseText));
+            } else if(this.status == 404 && document.getElementById("output").innerHTML == "") {
+                document.getElementById("output").innerHTML = "The ISBN or Author that you are searching for was not found...";
+            }
+        };
+        xhttp.open('GET', url, true);       //This executes the above code using a GET request to the url (always set to true)
+        xhttp.send();                       //once this is all set, send it to the server. When the server replies it will trigger the onreadystatechange event
+    });
+    document.getElementById("btnDelete").addEventListener("click", (event) =>{
+        if(document.getElementById("isbn").value.length == 0){
+            console.log("isbn input is empty");
+            document.getElementById("output").innerHTML = "The entered ISBN is not valid";
+        }
+        let url = CreateUrl("https://secure-eyrie-76929.herokuapp.com/api/books");
+        //let url = "https://secure-eyrie-76929.herokuapp.com/api/books/23423";
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200 && document.getElementById("isbn").value.length != 0) {
+                document.getElementById("output").innerHTML = "The book with ISBN, " + document.getElementById("isbn").value +
+                    " was successfully deleted";
+            } else if(this.status == 404) {
+                document.getElementById("output").innerHTML = "The ISBN or Author that you are searching for was not found...";
+            }
+        };
+        xhttp.open('DELETE', url, true);       //This executes the above code using a GET request to the url (always set to true)
+        xhttp.send();                       //once this is all set, send it to the server. When the server replies it will trigger the onreadystatechange event
+    });
+
+</script>
+</body>
+</html>

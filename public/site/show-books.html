@@ -21,7 +21,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="show-books.html">Display All</a>
                 <a class="nav-item nav-link" href="find-book.html">Find Book</a>
-                <a class="nav-item nav-link" href="add-book.html">Add New Book</a>
+                <a class="nav-item nav-link" href="add-book.html">Add Book</a>
                 <a class="nav-item nav-link" href="remove-book.html">Remove Book</a>
                 <a class="nav-item nav-link" href="update-book.html">Update Book</a>
             </div>
@@ -30,11 +30,13 @@
 </header>
 
 <body>
+    <div class="container text-center">
+        <h1 class="home-title">Display All Books</h1>
+        <button class="btn btn-lg btn-outline-primary" id="btnLoadBooks">Load Books</button>
 
-    <div class="container text-center single-button">
-        <button class="btn-primary btn-lg" id="btnLoadBooks">Load Books</button>
-        <div class="jumbotron" id="output">
+        <div class="jumbotron jumbotron-padding" id="output">
         </div>
+
     </div>
 
 
@@ -59,7 +61,7 @@
                 '           <td>' + data[book]["isbn"]+  '</td>\n' +
                 '           <td>' + data[book]["name"]+  '</td>\n' +
                 '           <td>' + data[book]["author"]+  '</td>\n' +
-                '           <td>' + data[book]["price"]+  '</td>\n' +
+                '           <td>' + '$' + data[book]["price"]+  '</td>\n' +
                 '       </tr>\n';
         }
 
