@@ -1,0 +1,8 @@
+{"books" : [
+  [{"_id":"5fc0709452744d4d20099a4c","name":"Ender's Game","author":"testerino","isbn":"123123","price":13.5,"__v":0},
+    {"_id":"5fc0715152744d4d20099a4d","name":"Hunger Games","author":"Jess Jessington","isbn":"222222-09","price":5,"__v":0},
+    {"_id":"5fc08a2bf407ee000442dab9","name":"Declaration of Independence","author":"George Washington","isbn":"23423","price":2,"__v":0},
+    {"_id":"5fc1cead8483b70004ac1d65","name":"LKSDFJ","author":"jlaksdjf","isbn":"9780124077263","price":2,"__v":0},
+    {"_id":"5fc1cfab8483b70004ac1d66","name":"xhttptest","author":"idk","isbn":"298347982374","price":3,"__v":0},
+    {"_id":"5fc1d0068483b70004ac1d67","name":"xhttptest","author":"lkasdjf;lkasdfasdfasdfasdf","isbn":"298347982374","price":3,"__v":0}]
+]}

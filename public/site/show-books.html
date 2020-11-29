@@ -30,12 +30,14 @@
 </header>
 
 <body>
-    <div class="container">
+
+    <div class="container text-center single-button">
         <button class="btn-primary btn-lg" id="btnLoadBooks">Load Books</button>
     </div>
     <div class="jumbotron" id="output">
 
     </div>
+
 <script>
     function CreateTable(data){         //data is the json that was returned from the server
         let table = "";
@@ -76,7 +78,6 @@
             }
         };
         xhttp.open('GET', url, true);       //This executes the above code using a GET request to the url (always set to true)
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");  //Im not sure if this is needed
         xhttp.send();                       //once this is all set, send it to the server. When the server replies it will trigger the onreadystatechange event
     });
 </script>
