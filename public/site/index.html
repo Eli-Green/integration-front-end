@@ -54,59 +54,6 @@
             <strong>Update Book:</strong> Allows you to update any of the available books in the database.
         </p>
     </div>
-
-
-    <button class="btn-primary btn-lg" id="btnLoadFriends">Load Friends</button>
-    <div class="jumbotron" id="output">
-
-    </div>
 </div>
-<script>
-    function CreateTable(data){         //data is the json that was returned from the server
-        let table = "";
-        table =
-            '<table class="table table-bordered table-hover"> \n' +
-            '   <thead>\n' +
-            '       <tr>\n' +
-            '           <th scope="col">First Name</th> \n'+
-            '           <th scope="col">Last Name</th> \n'+
-            '           <th scope="col">Phone</th> \n'+
-            '           <th scope="col">Email</th> \n'+
-            '           <th scope="col">Birthday</th> \n'+
-            '           <th scope="col">Can Call Anytime</th> \n'+
-            '       </tr>\n' +
-            '   </thead>\n' +
-            '   <tbody>\n';
-
-        for (let friend in data){       //for each friend object in the data that was returned
-            table +=                    //Sets the headings for the table
-                '       <tr>\n' +
-                '           <td>' + data[friend]["firstName"]+  '</td>\n' +
-                '           <td>' + data[friend]["lastName"]+  '</td>\n' +
-                '           <td>' + data[friend]["phone"]+  '</td>\n' +
-                '           <td>' + data[friend]["email"]+  '</td>\n' +
-                '           <td>' + data[friend]["birthday"]+  '</td>\n' +
-                '           <td>' + (data[friend]["callAnytime"]?"Yes":"No") +  '</td>\n' +
-                '       </tr>\n';
-        }
-
-        table +=
-            '   </tbody>\n' +
-            '</table>\n'
-        return table;           //return all the html data for the table that we just generated
-    }
-    document.getElementById("btnLoadFriends").addEventListener("click", (event) =>{     //when the button with btnLoadFriends is clicked, it triggers the building of the table
-        let url = "https://arias-friends-api.herokuapp.com/api/friends/"
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function (){         //onreadystate change is a kind of event handler that is a function built into xhttp. If the ready state changes on the xhttp object
-            if (this.readyState == 4 && this.status == 200){        //check if the ready state just recieved info (4) and the request was code 200. could have an else if the code is 404
-                document.getElementById("output").innerHTML =       //to respond in the case of an error
-                    CreateTable(JSON.parse(this.responseText));     //the table uses the response that the xhttp object recieves from the backend
-            }
-        };
-        xhttp.open('GET', url, true);       //This executes the above code using a GET request to the url (always set to true)
-        xhttp.send();                       //once this is all set, send it to the server. When the server replies it will trigger the onreadystatechange event
-    });
-</script>
 </body>
 </html>
