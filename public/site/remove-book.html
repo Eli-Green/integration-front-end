@@ -96,7 +96,7 @@
                     document.getElementById("output").innerHTML =
                         PrintBook(JSON.parse(this.responseText));
             } else if(this.status == 404) {
-                document.getElementById("output").innerHTML = "The ISBN or Author that you are searching for was not found...";
+                document.getElementById("output").innerHTML = "The book was not found...";
             }
         };
         xhttp.open('GET', url, true);       //This executes the above code using a GET request to the url (always set to true)
@@ -115,7 +115,7 @@
                 document.getElementById("output").innerHTML = "The book with ISBN, " + document.getElementById("isbn").value +
                         " was successfully deleted";
             } else if(this.status == 404) {
-                document.getElementById("output").innerHTML = "The ISBN or Author that you are searching for was not found...";
+                document.getElementById("output").innerHTML = "The book was unable to be deleted...";
             }
         };
         xhttp.open('DELETE', url, true);       //This executes the above code using a GET request to the url (always set to true)
