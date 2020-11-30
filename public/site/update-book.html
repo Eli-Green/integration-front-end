@@ -116,7 +116,7 @@
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
                 document.getElementById("output").innerHTML =
-                    "<pre>" + this.responseText + "</pre>";
+                    "The book was successfully updated!";
             } else if(this.status == 404) {
                 document.getElementById("output").innerHTML = "Unable to update...";
             }
