@@ -150,7 +150,7 @@
                     document.getElementById("output").innerHTML =
                         PrintBookAuthor(JSON.parse(this.responseText));
                 }
-            } else if(this.status == 404) {
+            } else if(this.status == 404 && document.getElementById("author").value.length == 0) {
                 document.getElementById("output").innerHTML = "The ISBN or Author that you are searching for was not found...";
             }
         };

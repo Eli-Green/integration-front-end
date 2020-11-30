@@ -33,7 +33,7 @@
 <div class="container">
     <h1 class="home-title">Delete Book</h1>
     <div class="container">
-        <h2>Please input either the isbn or the author and press the search button</h2>
+        <h2>Please input either the isbn and search to confirm selection before deleting</h2>
         <div class="form-group">
             <label for="isbn">ISBN:</label>
             <input type="text" name="isbn" id="isbn" class="form-control"
@@ -86,7 +86,7 @@
     document.getElementById("btnSearch").addEventListener("click", (event) =>{
         if(document.getElementById("isbn").value.length == 0){
             console.log("isbn input is empty");
-            document.getElementById("output").innerHTML = "Please input a valid ISBN before Searching";
+            document.getElementById("output").innerHTML = "The ISBN Field is blank. Please input a value to search for";
         }
         let url = CreateUrl("https://secure-eyrie-76929.herokuapp.com/api/books");
         //let url = "https://secure-eyrie-76929.herokuapp.com/api/books/23423";
@@ -95,7 +95,7 @@
             if (this.readyState == 4 && this.status == 200 && document.getElementById("isbn").value.length != 0) {
                     document.getElementById("output").innerHTML =
                         PrintBook(JSON.parse(this.responseText));
-            } else if(this.status == 404 && document.getElementById("output").innerHTML == "") {
+            } else if(this.status == 404) {
                 document.getElementById("output").innerHTML = "The ISBN or Author that you are searching for was not found...";
             }
         };

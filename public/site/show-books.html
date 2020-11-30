@@ -77,7 +77,10 @@
             if (this.readyState == 4 && this.status == 200) {        //check if the ready state just recieved info (4) and the request was code 200. could have an else if the code is 404
                 document.getElementById("output").innerHTML =       //to respond in the case of an error
                     CreateTable(JSON.parse(this.responseText));     //the table uses the response that the xhttp object recieves from the backend
+            } else if(this.status == 404) {
+                document.getElementById("output").innerHTML = "There was an error loading the books...";
             }
+
         };
         xhttp.open('GET', url, true);       //This executes the above code using a GET request to the url (always set to true)
         xhttp.send();                       //once this is all set, send it to the server. When the server replies it will trigger the onreadystatechange event
