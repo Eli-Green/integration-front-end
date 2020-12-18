@@ -71,7 +71,7 @@
         return table;           //return all the html data for the table that we just generated
     }
     document.getElementById("btnLoadBooks").addEventListener("click", (event) =>{     //when the button with btnLoadBooks is clicked, it triggers the building of the table
-        let url = "https://secure-eyrie-76929.herokuapp.com/api/books/";
+        let url = "https://library-backend-emg.herokuapp.com/api/books/";
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {         //onreadystate change is a kind of event handler that is a function built into xhttp. If the ready state changes on the xhttp object
             if (this.readyState == 4 && this.status == 200) {        //check if the ready state just recieved info (4) and the request was code 200. could have an else if the code is 404

@@ -52,7 +52,7 @@
 </div>
 
 <script>
-    primaryUrl = "https://secure-eyrie-76929.herokuapp.com/api/books/"
+    primaryUrl = "https://library-backend-emg.herokuapp.com/api/books/"
 
     function CreateUrl(currentUrl){
         currentUrl = currentUrl + '/' + document.getElementById("isbn").value;
@@ -77,7 +77,7 @@
                     '<label for="price">Price:</label>' +
                     '<input type="number" name="price" id="price" class="form-control" value="' + data["price"] + '">' +
                 '</div>'
-        primaryUrl = "https://secure-eyrie-76929.herokuapp.com/api/books/" + data["isbn"];
+        primaryUrl = "https://library-backend-emg.herokuapp.com/api/books/" + data["isbn"];
         return formOutput;           //return all the html data for the table that we just generated
     }
 
@@ -95,8 +95,7 @@
             console.log("isbn input is empty");
             document.getElementById("output").innerHTML = "Please input a valid ISBN before Searching";
         }
-        let url = CreateUrl("https://secure-eyrie-76929.herokuapp.com/api/books");
-        //let url = "https://secure-eyrie-76929.herokuapp.com/api/books/23423";
+        let url = CreateUrl("https://library-backend-emg.herokuapp.com/api/books");
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200 && document.getElementById("isbn").value.length != 0) {

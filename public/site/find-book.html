@@ -137,9 +137,7 @@
         } else {
             document.getElementById("output").innerHTML = "Please enter either ISBN or Author before pressing Search";
         }
-        let url = CreateUrl(inputType, "https://secure-eyrie-76929.herokuapp.com/api/books");
-        //let url = "https://secure-eyrie-76929.herokuapp.com/api/books?author=testerino";
-        //let url = "https://secure-eyrie-76929.herokuapp.com/api/books/23423";
+        let url = CreateUrl(inputType, "https://library-backend-emg.herokuapp.com/api/books");
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {

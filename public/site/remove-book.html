@@ -107,8 +107,7 @@
             console.log("isbn input is empty");
             document.getElementById("output").innerHTML = "The entered ISBN is not valid";
         }
-        let url = CreateUrl("https://secure-eyrie-76929.herokuapp.com/api/books");
-        //let url = "https://secure-eyrie-76929.herokuapp.com/api/books/23423";
+        let url = CreateUrl("https://library-backend-emg.herokuapp.com/api/books");
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200 && document.getElementById("isbn").value.length != 0) {
