@@ -1,4 +1,4 @@
-# integration-front-end
+# Book Database Website Front-end
 
 This website was created as a final project for Netcentric Computing at Seattle Pacific University. It acts as a book database where a user can View, Add, Update, and Remove a book from a database.
 
